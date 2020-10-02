@@ -8,8 +8,9 @@ export class ScriptComponent {
     }
 
     public loadScripts() {
-        this.renderExternalScript('assets/js/main.js').onload = () => { }
-        // this.renderExternalScript('assets/js/vendors/jquery.nouislider.min.js').onload = () => { }
+        let scripts = document.getElementById('script');
+        if (scripts == undefined)
+            this.renderExternalScript('assets/js/main.js').onload = () => { }
     }
 
     public renderExternalScript(src: string): HTMLScriptElement {
@@ -18,7 +19,7 @@ export class ScriptComponent {
         script.src = src;
         script.async = true;
         script.defer = true;
-        script.id = "script";
+        script.className = "main";
         this._renderer.appendChild(document.body, script);
         return script;
     }

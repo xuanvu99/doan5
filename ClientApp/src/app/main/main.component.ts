@@ -1,19 +1,16 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { ScriptComponent } from "../libs/script.service";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent extends ScriptComponent implements OnInit {
+export class MainComponent implements OnInit {
 
-  constructor(injector: Injector) {
-    super(injector)
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.loadScripts();
   }
 
 }
