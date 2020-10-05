@@ -17,6 +17,7 @@ export class MainService {
         script.src = src;
         script.async = true;
         script.defer = true;
+        script.className = "home";
         this._renderer.appendChild(document.body, script);
         return script;
     }

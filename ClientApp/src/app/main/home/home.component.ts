@@ -13,6 +13,12 @@ export class HomeComponent extends MainService implements OnInit {
   }
 
   ngOnInit(): void {
+    let elem = document.getElementsByClassName('home');
+    if (elem.length != undefined) {
+      for (var i = elem.length - 1; 0 <= i; i--) {
+        elem[i].remove();
+      }
+    }
     this.loadScripts();
   }
 

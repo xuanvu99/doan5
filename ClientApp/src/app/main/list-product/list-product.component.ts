@@ -13,26 +13,26 @@ export class ListProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadScripts();
-    let script = document.getElementsByClassName('nouislider');
-    for (var i = script.length - 1; 0 <= i; i--) {
-      script[i].remove();
-    }
+    // let elem = document.getElementsByClassName('nouislider');
+    // for (var i = elem.length - 1; 0 <= i; i--) {
+    //   elem[i].remove();
+    // }
+    // this.loadScripts();
   }
 
-  public loadScripts() {
-    this.renderExternalScript('assets/js/vendors/jquery.nouislider.min.js').onload = () => { }
-  }
+  // public loadScripts() {
+  //   this.renderExternalScript('assets/js/vendors/jquery.nouislider.min.js').onload = () => { }
+  // }
 
-  public renderExternalScript(src: string): HTMLScriptElement {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    script.async = true;
-    script.defer = true;
-    script.className = "nouislider";
-    this._renderer.appendChild(document.body, script);
-    return script;
-  }
+  // public renderExternalScript(src: string): HTMLScriptElement {
+  //   const script = document.createElement('script');
+  //   script.type = 'text/javascript';
+  //   script.src = src;
+  //   script.async = true;
+  //   script.defer = true;
+  //   script.className = "nouislider";
+  //   this._renderer.appendChild(document.body, script);
+  //   return script;
+  // }
 
 }

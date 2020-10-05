@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../auth/login/login.component';
+import { Page404Component } from '../auth/page404/page404.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'phuong-thuc-giao-hang', component: DeliveryMethodComponent },
       { path: 'xac-thuc-don-hang', component: ConfirmationComponent },
       { path: 'dat-hang-thanh-cong', component: CheckoutComponent },
-      { path: 'dang-nhap-dang-ky', component: LoginComponent }
+      { path: 'dang-nhap-dang-ky', component: LoginComponent },
+      { path: '**', component: Page404Component }
     ]
   }
 ];
