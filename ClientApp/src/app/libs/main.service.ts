@@ -1,6 +1,6 @@
 import { Injector, Renderer2 } from '@angular/core';
 
-export class ScriptComponent {
+export class MainService {
     public _renderer: any;
 
     constructor(injector: Injector) {
@@ -8,9 +8,7 @@ export class ScriptComponent {
     }
 
     public loadScripts() {
-        let scripts = document.getElementById('script');
-        if (scripts == undefined)
-            this.renderExternalScript('assets/js/main.js').onload = () => { }
+        this.renderExternalScript('assets/js/main.js').onload = () => { }
     }
 
     public renderExternalScript(src: string): HTMLScriptElement {
@@ -19,7 +17,6 @@ export class ScriptComponent {
         script.src = src;
         script.async = true;
         script.defer = true;
-        script.className = "main";
         this._renderer.appendChild(document.body, script);
         return script;
     }

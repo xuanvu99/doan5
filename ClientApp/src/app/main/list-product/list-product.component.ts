@@ -15,7 +15,7 @@ export class ListProductComponent implements OnInit {
   ngOnInit(): void {
     this.loadScripts();
     let script = document.getElementsByClassName('nouislider');
-    for (var i = script.length - 1; 1 <= i; i--) {
+    for (var i = script.length - 1; 0 <= i; i--) {
       script[i].remove();
     }
   }
