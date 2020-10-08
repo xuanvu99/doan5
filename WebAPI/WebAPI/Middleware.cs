@@ -19,7 +19,8 @@ namespace WebAPI
 
         public Task Invoke(HttpContext httpContext)
         {
-
+            httpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            httpContext.Response.Headers.Add("Access-Control-Expose-Headers", "*");
             return _next(httpContext);
         }
     }
@@ -27,7 +28,7 @@ namespace WebAPI
     // Extension method used to add the middleware to the HTTP request pipeline.
     public static class MiddlewareExtensions
     {
-        public static IApplicationBuilder UseMiddlewareClassTemplate(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseApiMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<Middleware>();
         }

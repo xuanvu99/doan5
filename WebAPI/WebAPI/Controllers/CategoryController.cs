@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class CategoryController : Controller
+    public class CategoryController : ControllerBase
     {
+        private readonly doan5Context _context;
+
+        public CategoryController(doan5Context context)
+        {
+            _context = context;
+        }
+
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Categories> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Categories;
         }
 
         // GET api/values/5

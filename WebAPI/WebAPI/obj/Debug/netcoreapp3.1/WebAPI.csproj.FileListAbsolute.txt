@@ -119,7 +119,6 @@
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/bin/Debug/netcoreapp3.1/runtimes/unix/lib/netcoreapp2.0/System.Runtime.Caching.dll
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
-/Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.csprojAssemblyReference.cache
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.AssemblyInfoInputs.cache
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.AssemblyInfo.cs
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.csproj.CoreCompileInputs.cache

@@ -1,11 +1,20 @@
-﻿<Properties StartupConfiguration="{0CD6854F-4492-4857-8A88-2137B229254B}|Default">
+﻿<Properties StartupConfiguration="{D1AE46EE-0E2F-4D98-8067-F7DC62D0A320}|Default">
   <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/CocCoc.app" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/Controllers/CategoryController.cs">
+    <Files>
+      <File FileName="WebAPI/Controllers/CategoryController.cs" Line="26" Column="38" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebAPI" expanded="True">
-            <Node name="WebAPI" expanded="True" />
+            <Node name="WebAPI" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="CategoryController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>

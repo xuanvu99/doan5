@@ -6,9 +6,9 @@ namespace WebAPI.Models
 {
     public partial class doan5Context : DbContext
     {
-        public doan5Context()
-        {
-        }
+        //public doan5Context()
+        //{
+        //}
 
         public doan5Context(DbContextOptions<doan5Context> options)
             : base(options)
@@ -35,14 +35,14 @@ namespace WebAPI.Models
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost,1433; Database=doan5;User=sa;Password=Vu902031;");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server=localhost,1433; Database=doan5;User=sa;Password=Vu902031;");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
