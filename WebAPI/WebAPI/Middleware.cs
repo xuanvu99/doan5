@@ -1,36 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace WebAPI
+namespace API
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class Middleware
+    public class ApiMiddleware
     {
-        private readonly RequestDelegate _next;
-
-        public Middleware(RequestDelegate next)
+        private readonly RequestDelegate next;
+        public ApiMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
-        public Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext context)
         {
-            httpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            httpContext.Response.Headers.Add("Access-Control-Expose-Headers", "*");
-            return _next(httpContext);
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            context.Response.Headers.Add("Access-Control-Expose-Headers", "*");
+            await next(context);
+        }
+    }
+    public static class ApiMiddlewareExtension
+    {
+        public static IApplicationBuilder UseApiMiddleware(
+            this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ApiMiddleware>();
         }
     }
 
-    // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class MiddlewareExtensions
-    {
-        public static IApplicationBuilder UseApiMiddleware(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<Middleware>();
-        }
-    }
 }
