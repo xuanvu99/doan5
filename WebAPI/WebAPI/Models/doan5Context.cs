@@ -28,21 +28,20 @@ namespace WebAPI.Models
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<PaymentMethods> PaymentMethods { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
-        public virtual DbSet<Prices> Prices { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Slides> Slides { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
 //            if (!optionsBuilder.IsConfigured)
 //            {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Server=localhost,1433; Database=doan5;User=sa;Password=Vu902031;");
+//                optionsBuilder.UseSqlServer("Server=localhost, 1433;Database=doan5;User=sa;Password=Vu902031;");
 //            }
-//        }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -375,23 +374,6 @@ namespace WebAPI.Models
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("fk_role_permission");
-            });
-
-            modelBuilder.Entity<Prices>(entity =>
-            {
-                entity.ToTable("prices");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.OptionId).HasColumnName("option_id");
-
-                entity.Property(e => e.Price).HasColumnName("price");
-
-                entity.HasOne(d => d.Option)
-                    .WithMany(p => p.Prices)
-                    .HasForeignKey(d => d.OptionId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("fk_option_price");
             });
 
             modelBuilder.Entity<Products>(entity =>

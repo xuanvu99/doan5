@@ -1,8 +1,16 @@
-﻿<Properties StartupConfiguration="{D1AE46EE-0E2F-4D98-8067-F7DC62D0A320}|Default">
+﻿<Properties StartupConfiguration="{7ADC17D6-137E-491E-87C8-A89D758181D2}|Default">
   <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/CocCoc.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/Controllers/CategoryController.cs">
     <Files>
-      <File FileName="WebAPI/Controllers/CategoryController.cs" Line="26" Column="38" />
+      <File FileName="WebAPI/Startup.cs" Line="24" Column="10" />
+      <File FileName="WebAPI/Models/doan5Context.cs" />
+      <File FileName="WebAPI/Program.cs" />
+      <File FileName="WebAPI/Controllers/CategoryController.cs" Line="34" Column="13" />
+      <File FileName="WebAPI/appsettings.json" />
+      <File FileName="WebAPI/Middleware.cs" />
+      <File FileName="WebAPI/Models/Categories.cs" />
+      <File FileName="WebAPI/WeatherForecast.cs" />
+      <File FileName="WebAPI/Models/Options.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
