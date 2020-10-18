@@ -348,7 +348,10 @@ namespace WebAPI.Models
                     .IsRequired()
                     .HasColumnName("name");
 
-                entity.Property(e => e.Status).HasColumnName("status");
+                entity.Property(e => e.Image)
+                    .HasColumnName("image")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Permissions>(entity =>

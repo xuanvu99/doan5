@@ -1,24 +1,25 @@
-﻿<Properties StartupConfiguration="{7ADC17D6-137E-491E-87C8-A89D758181D2}|Default">
+﻿<Properties StartupConfiguration="{C1712F70-1018-4E4A-9207-1A3F9B2CE7E3}|Default">
   <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/CocCoc.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../usr/local/share/dotnet/sdk/3.1.402/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Sdk.DefaultItems.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/PaymentMethodController.cs">
     <Files>
-      <File FileName="../../../../../usr/local/share/dotnet/sdk/3.1.402/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Sdk.DefaultItems.targets" Line="331" Column="20" />
-      <File FileName="WebAPI/Controllers/PaymentMethodController.cs" Line="44" Column="19" />
-      <File FileName="WebAPI/Models/UploadPaymentMethod.cs" />
-      <File FileName="WebAPI/Models/PaymentMethods.cs" />
+      <File FileName="Controllers/PaymentMethodController.cs" Line="36" Column="32" />
+      <File FileName="Models/PaymentMethods.cs" Line="17" Column="42" />
+      <File FileName="Startup.cs" Line="53" Column="14" />
+      <File FileName="Models/Orders.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebAPI" expanded="True">
             <Node name="WebAPI" expanded="True">
-              <Node name="Dependencies" expanded="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
               <Node name="Controllers" expanded="True">
                 <Node name="PaymentMethodController.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="services" expanded="True" />
-              <Node name="Uploads" expanded="True" />
             </Node>
           </Node>
         </State>
