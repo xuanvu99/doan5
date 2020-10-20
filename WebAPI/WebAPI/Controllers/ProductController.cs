@@ -28,6 +28,28 @@ namespace WebAPI.Controllers
             return await _context.Products.ToListAsync();
         }
 
+
+        [HttpGet("get-page/{begin}/{end}")]
+        public async Task<ActionResult<IEnumerable<Products>>> GetPage(int begin, int end)
+        {
+            var list = _context.Products.ToList();
+
+            var result = new List<Products>();
+            for (int i = begin; i < begin + end; i++)
+            {
+                try
+                {
+                    result.Add(list[i]);
+                }
+                catch (Exception) { }
+            }
+            return Ok(new
+            {
+                list = result,
+                total = list.Count
+            });
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Products>> get(int id)
         {

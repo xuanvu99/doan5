@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
-using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
@@ -28,12 +27,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get-page/{begin}/{end}")]
-        public async Task<ActionResult<IEnumerable<PaymentMethods>>> GetPage(int begin, int end)
+        public ActionResult<IEnumerable<PaymentMethods>> GetPage(int begin, int end)
         {
             var list = _context.PaymentMethods.ToList();
 
             var result = new List<PaymentMethods>();
-            for(int i=begin; i < begin + end; i++)
+            for (int i = begin; i < begin + end; i++)
             {
                 try
                 {
@@ -41,7 +40,8 @@ namespace WebAPI.Controllers
                 }
                 catch (Exception) { }
             }
-            return Ok(new {
+            return Ok(new
+            {
                 list = result,
                 total = list.Count
             });
@@ -62,9 +62,10 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<PaymentMethods>> create(PaymentMethods payment_method)
         {
-            var pm = new PaymentMethods();
+            PaymentMethods pm = new PaymentMethods();
             pm.Name = payment_method.Name;
             pm.Description = payment_method.Description;
+            pm.Image = payment_method.Image;
             _context.Add(pm);
             await _context.SaveChangesAsync();
             return Ok(payment_method);
@@ -95,7 +96,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Ok(new { status = true });
+            return Ok(payment_method);
         }
 
         [HttpDelete("{id}")]

@@ -16,11 +16,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="services\" />
-    <Folder Include="Uploads\" />
-    <Folder Include="Uploads\images\" />
+    <None Remove="Models\UploadPaymentMethod.css" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Models\UploadPaymentMethod.css" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
 </Project>

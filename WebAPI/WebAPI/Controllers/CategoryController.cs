@@ -40,6 +40,28 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet("get-page/{begin}/{end}")]
+        public ActionResult<IEnumerable<Categories>> GetPage(int begin, int end)
+        {
+            var list = _context.Categories.ToList();
+
+            var result = new List<Categories>();
+            for (int i = begin; i < begin + end; i++)
+            {
+                try
+                {
+                    result.Add(list[i]);
+                }
+                catch (Exception) { }
+            }
+            return Ok(new
+            {
+                list = result,
+                total = list.Count
+            });
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<Categories>> create(Categories category)
         {
