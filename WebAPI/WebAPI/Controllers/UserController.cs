@@ -12,57 +12,57 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly doan5Context _context;
 
-        public ProductController(doan5Context context)
+        public UserController(doan5Context context)
         {
             _context = context;
         }
 
         // GET: api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Products>>> Get()
+        public async Task<ActionResult<IEnumerable<Users>>> Get()
         {
-            return await _context.Products.ToListAsync();
-        }
-
-        [HttpGet("get-page/{begin}/{end}")]
-        public ActionResult<IEnumerable<Products>> GetPage(int first, int rows)
-        {
-            var res = _context.Products.Skip(first).Take(rows).ToList();
-            return Ok(new { list = res, total = _context.Products.Count() });
+            return await _context.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Products>> get(int id)
+        public async Task<ActionResult<Users>> get(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return product;
+            return user;
+        }
+
+        [HttpGet("get-page/{first}/{rows}")]
+        public ActionResult<IEnumerable<Users>> GetPage(int first, int rows)
+        {
+            var res = _context.Users.Skip(first).Take(rows).ToList();
+            return Ok(new { list = res, total = _context.Users.Count() });
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<Products>> create(Products product)
+        public async Task<ActionResult<Users>> create(Users user)
         {
-            _context.Products.Add(product);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Ok(product);
+            return Ok(user);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> update(int id, [FromBody] Products product)
+        public async Task<ActionResult> update(int id, [FromBody] Users user)
         {
-            if (id != product.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -84,21 +84,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Products>> delete(int id)
+        public async Task<ActionResult<Users>> delete(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            _context.Products.Remove(product);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return Ok(product);
+            return Ok(user);
         }
 
         public bool Exists(int id)
         {
-            return _context.Products.Any(c => c.Id == id);
+            return _context.Users.Any(c => c.Id == id);
         }
     }
 }

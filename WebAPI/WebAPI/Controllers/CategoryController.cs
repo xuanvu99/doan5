@@ -39,26 +39,11 @@ namespace WebAPI.Controllers
             return category;
         }
 
-
-        [HttpGet("get-page/{begin}/{end}")]
-        public ActionResult<IEnumerable<Categories>> GetPage(int begin, int end)
+        [HttpGet("get-page/{first}/{rows}")]
+        public ActionResult<IEnumerable<Categories>> GetPage(int first, int rows)
         {
-            var list = _context.Categories.ToList();
-
-            var result = new List<Categories>();
-            for (int i = begin; i < begin + end; i++)
-            {
-                try
-                {
-                    result.Add(list[i]);
-                }
-                catch (Exception) { }
-            }
-            return Ok(new
-            {
-                list = result,
-                total = list.Count
-            });
+            var res = _context.Categories.Skip(first).Take(rows).ToList();
+            return Ok(new { list = res, total = _context.Categories.Count() });
         }
 
 

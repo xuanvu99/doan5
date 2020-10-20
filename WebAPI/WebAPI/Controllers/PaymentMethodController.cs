@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Helpers;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -26,25 +27,11 @@ namespace WebAPI.Controllers
             return await _context.PaymentMethods.ToListAsync();
         }
 
-        [HttpGet("get-page/{begin}/{end}")]
-        public ActionResult<IEnumerable<PaymentMethods>> GetPage(int begin, int end)
+        [HttpGet("get-page/{first}/{rows}")]
+        public ActionResult<IEnumerable<PaymentMethods>> GetPage(int first, int rows)
         {
-            var list = _context.PaymentMethods.ToList();
-
-            var result = new List<PaymentMethods>();
-            for (int i = begin; i < begin + end; i++)
-            {
-                try
-                {
-                    result.Add(list[i]);
-                }
-                catch (Exception) { }
-            }
-            return Ok(new
-            {
-                list = result,
-                total = list.Count
-            });
+            var res = _context.PaymentMethods.Skip(first).Take(rows).ToList();
+            return Ok(new { list = res, total = _context.PaymentMethods.Count() });
         }
 
         [HttpGet("{id}")]

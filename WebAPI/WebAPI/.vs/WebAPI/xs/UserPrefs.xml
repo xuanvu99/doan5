@@ -1,30 +1,28 @@
 ﻿<Properties StartupConfiguration="{C1712F70-1018-4E4A-9207-1A3F9B2CE7E3}|Default">
   <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/CocCoc.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/PaymentMethods.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/PaymentMethodController.cs">
     <Files>
-      <File FileName="Controllers/PaymentMethodController.cs" Line="64" Column="10" />
-      <File FileName="Models/PaymentMethods.cs" Line="17" Column="42" />
-      <File FileName="Startup.cs" Line="63" Column="37" />
+      <File FileName="Controllers/PaymentMethodController.cs" Line="30" Column="45" />
+      <File FileName="Models/PaymentMethods.cs" />
+      <File FileName="Startup.cs" />
       <File FileName="Models/Orders.cs" />
-      <File FileName="Controllers/CategoryController.cs" Line="43" Column="44" />
-      <File FileName="Controllers/ProductController.cs" Line="35" Column="41" />
-      <File FileName="Controllers/UploadController.cs" Line="19" Column="72" />
-      <File FileName="Models/Images.cs" Line="1" Column="1" />
+      <File FileName="Controllers/CategoryController.cs" Line="41" Column="1" />
+      <File FileName="Controllers/ProductController.cs" />
+      <File FileName="Controllers/UploadController.cs" />
+      <File FileName="Models/Images.cs" />
+      <File FileName="Helpers/Pagination.cs" />
+      <File FileName="Controllers/UserController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebAPI" expanded="True">
             <Node name="WebAPI" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ProductController.cs" selected="True" />
               </Node>
-              <Node name="Models" expanded="True">
-                <Node name="PaymentMethods.cs" selected="True" />
-              </Node>
-              <Node name="Resources" expanded="True">
-                <Node name="Images" expanded="True" />
-              </Node>
+              <Node name="Helpers" expanded="True" />
             </Node>
           </Node>
         </State>
