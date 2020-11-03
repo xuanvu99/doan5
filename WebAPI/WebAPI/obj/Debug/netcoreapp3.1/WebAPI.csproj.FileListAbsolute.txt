@@ -131,3 +131,4 @@
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.dll
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.pdb
 /Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/obj/Debug/netcoreapp3.1/WebAPI.genruntimeconfig.cache
+/Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/bin/Debug/netcoreapp3.1/BCrypt.Net-Next.dll

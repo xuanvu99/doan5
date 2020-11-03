@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Helpers;
 using WebAPI.Models;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
@@ -14,10 +14,15 @@ namespace WebAPI.Controllers
     public class PaymentMethodController: ControllerBase
     {
         private readonly doan5Context _context;
+        private readonly IFileService _fileService;
 
-        public PaymentMethodController(doan5Context context)
+        public PaymentMethodController(
+            doan5Context context,
+            IFileService fileService
+        )
         {
             _context = context;
+            _fileService = fileService;
         }
 
         // GET: api/values
@@ -52,38 +57,41 @@ namespace WebAPI.Controllers
             PaymentMethods pm = new PaymentMethods();
             pm.Name = payment_method.Name;
             pm.Description = payment_method.Description;
-            pm.Image = payment_method.Image;
+
+            if(payment_method.Image != null)
+            {
+                pm.Image = _fileService.WriteFileBase64(payment_method.Image);
+            }
+
             _context.Add(pm);
             await _context.SaveChangesAsync();
             return Ok(payment_method);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> update(int id, [FromBody] PaymentMethods payment_method)
+        public ActionResult update(int id, [FromBody] PaymentMethods payment_method)
         {
             if (id != payment_method.Id)
             {
                 return BadRequest();
             }
-            _context.Entry(payment_method).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!Exists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                var pm = _context.PaymentMethods.Find(id);
+                pm.Name = payment_method.Name;
+                pm.Description = payment_method.Description;
 
-            return Ok(payment_method);
+                if (payment_method.Image != null)
+                {
+                    pm.Image = _fileService.WriteFileBase64(payment_method.Image);
+                }
+                _context.SaveChanges();
+                return Ok(pm);
+            } catch(Exception)
+            {
+
+            }
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]

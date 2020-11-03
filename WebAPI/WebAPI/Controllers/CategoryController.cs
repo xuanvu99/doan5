@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Ok(new { status = true });
+            return Ok(category);
         }
 
         [HttpDelete("{id}")]

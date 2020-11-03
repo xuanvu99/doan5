@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HhtCTiqAliXnnwDWi9oUaNfToCNmzFWyZgjkXyLCBIgu3MrLb5BbCqMm9DFwgD83sBO+9mszxgv9pzZwrcf1fw==",
+  "dgSpecHash": "dTNTh6Gma1Y2TpwahjA1O1WyJu32nfbwZJZzZJxTTzLjvRRoc1BAc2UZQ7K3Ahv9YlUv5zQw/yDIpob1+GRn2g==",
   "success": true,
   "projectFilePath": "/Users/xuanvu/Documents/DoAn5/WebAPI/WebAPI/WebAPI.csproj",
   "expectedPackageFiles": [
+    "/Users/xuanvu/.nuget/packages/bcrypt.net-next/4.0.0/bcrypt.net-next.4.0.0.nupkg.sha512",
     "/Users/xuanvu/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.9/microsoft.aspnetcore.authentication.jwtbearer.3.1.9.nupkg.sha512",
     "/Users/xuanvu/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "/Users/xuanvu/.nuget/packages/microsoft.aspnetcore.razor/2.2.0/microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

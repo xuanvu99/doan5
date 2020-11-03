@@ -289,6 +289,8 @@ namespace WebAPI.Models
                     .HasColumnName("name")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
                 entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
@@ -387,12 +389,6 @@ namespace WebAPI.Models
 
                 entity.Property(e => e.CategoryId).HasColumnName("category_id");
 
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasColumnName("code")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Content)
                     .HasColumnName("content")
                     .HasColumnType("ntext");
@@ -408,8 +404,6 @@ namespace WebAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Price).HasColumnName("price");
-
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
 
                 entity.Property(e => e.Sale).HasColumnName("sale");
 
@@ -503,8 +497,14 @@ namespace WebAPI.Models
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("password")
-                    .HasMaxLength(50)
+                    .HasMaxLength(250)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .HasColumnName("phone")
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

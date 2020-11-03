@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WebAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,7 +29,7 @@ namespace WebAPI.Controllers
             return await _context.Products.ToListAsync();
         }
 
-        [HttpGet("get-page/{begin}/{end}")]
+        [HttpGet("get-page/{first}/{rows}")]
         public ActionResult<IEnumerable<Products>> GetPage(int first, int rows)
         {
             var res = _context.Products.Skip(first).Take(rows).ToList();
@@ -36,51 +37,94 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Products>> get(int id)
+        public ActionResult get(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var p = _context.Products
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Name,
+                    p.CategoryId,
+                    p.Slug,
+                    p.Sale,
+                    p.Price,
+                    p.Description,
+                    p.Content,
+                    p.Status
+                })
+                .FirstOrDefault(p => p.Id == id);
+            var o = _context.Options.Where(o => o.ProductId == id).ToList();
+            if (p == null)
             {
                 return NotFound();
             }
-            return product;
+            return Ok(new { product = p, option = o });
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<Products>> create(Products product)
+        public ActionResult create([FromBody] Products data)
         {
+            var product = new Products();
+            product.Name = data.Name;
+            product.Slug = data.Slug;
+            product.Price = data.Price;
+            product.Sale = data.Sale;
+            product.Description = data.Description;
+            product.Content = data.Content;
+            product.Status = data.Status;
+            product.CategoryId = 1;
             _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return Ok(product);
+            _context.SaveChanges();
+            foreach (var item in data.Options)
+            {
+                var option = new Options();
+                option.ProductId = product.Id;
+                option.Name = item.Name;
+                option.Quantity = item.Quantity;
+                option.Price = item.Price;
+                _context.Options.Add(option);
+                _context.SaveChanges();
+            }
+            return Ok(data);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> update(int id, [FromBody] Products product)
+        public ActionResult update(int id, [FromBody] Products data)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
-            _context.Entry(product).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!Exists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                var product = _context.Products.Find(id);
+                product.Name = data.Name;
+                product.Slug = data.Slug;
+                product.Price = data.Price;
+                product.Sale = data.Sale;
+                product.Description = data.Description;
+                product.Content = data.Content;
+                product.Status = data.Status;
+                product.CategoryId = 1;
+                _context.SaveChanges();
 
-            return Ok(new { status = true });
+                var op = _context.Options.Where(o => o.ProductId == id);
+                _context.Options.RemoveRange(op);
+
+                foreach (var item in data.Options)
+                {
+                    var option = new Options();
+                    option.ProductId = id;
+                    option.Name = item.Name;
+                    option.Quantity = item.Quantity;
+                    option.Price = item.Price;
+                    _context.Options.Add(option);
+                    _context.SaveChanges();
+                }
+                return Ok(data);
+            }
+            catch (Exception)
+            {
+
+            }
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]

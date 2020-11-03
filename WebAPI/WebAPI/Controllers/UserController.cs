@@ -2,23 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
+using WebAPI.Services;
+using BC = BCrypt.Net.BCrypt;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly doan5Context _context;
+        private readonly IFileService _fileService;
 
-        public UserController(doan5Context context)
+        public UserController(doan5Context context, IFileService fileService)
         {
             _context = context;
+            _fileService = fileService;
         }
 
         // GET: api/values
@@ -48,39 +54,54 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Users>> create(Users user)
+        public ActionResult<Users> create(Users user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return Ok(user);
+            Users u = new Users();
+            u.Name = user.Name;
+            u.Email = user.Email;
+            u.Phone = user.Phone;
+            u.Password = BC.HashPassword(user.Password);
+
+            if (user.Image != null)
+            {
+                u.Image = _fileService.WriteFileBase64(user.Image);
+            }
+
+            _context.Add(u);
+            _context.SaveChanges();
+            return Ok(u);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> update(int id, [FromBody] Users user)
+        public ActionResult update(int id, [FromBody] Users user)
         {
             if (id != user.Id)
             {
                 return BadRequest();
             }
-            _context.Entry(user).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!Exists(id))
+                var u = _context.Users.Find(id);
+                u.Name = user.Name;
+                u.Email = user.Email;
+                u.Phone = user.Phone;
+                if (user.Password != null)
                 {
-                    return NotFound();
+                    u.Password = BC.HashPassword(user.Password);
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return Ok(new { status = true });
+                if (user.Image != null)
+                {
+                    u.Image = _fileService.WriteFileBase64(user.Image);
+                }
+                _context.SaveChanges();
+                return Ok(u);
+            }
+            catch (Exception)
+            {
+
+            }
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
@@ -100,5 +121,7 @@ namespace WebAPI.Controllers
         {
             return _context.Users.Any(c => c.Id == id);
         }
+
+
     }
 }
