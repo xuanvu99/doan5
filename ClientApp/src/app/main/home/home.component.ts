@@ -1,19 +1,19 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { MainService } from "../../libs/main.service";
+import { ScriptService } from "../../libs/script.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent extends MainService implements OnInit {
+export class HomeComponent extends ScriptService implements OnInit {
 
   constructor(injector: Injector) {
-    super(injector);
+    super(injector)
   }
 
   ngOnInit(): void {
-    let elem = document.getElementsByClassName('home');
+    let elem = document.getElementsByClassName('script');
     if (elem.length != undefined) {
       for (var i = elem.length - 1; 0 <= i; i--) {
         elem[i].remove();

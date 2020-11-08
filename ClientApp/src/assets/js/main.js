@@ -1,886 +1,390 @@
-jQuery(document).ready(function($) {
-
-    "use strict"
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	LOADER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $("#loader").delay(1000).fadeOut("slow");
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*		STICKY NAVIGATION
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".sticky").sticky({ topSpacing: 0 });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*  FULL SCREEN
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $('.full-screen').superslides({});
-
-    /*-----------------------------------------------------------------------------------
-
-        Animated progress bars
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $('.progress-bars').waypoint(function() {
-
-            $('.progress').each(function() {
-
-                $(this).find('.progress-bar').animate({
-
-                    width: $(this).attr('data-percent')
-
-                }, 200);
-
-            });
-        },
-
-        {
-
-            offset: '100%',
-
-            triggerOnce: true
-
-        });
-
-    /* ==========================================================================
-
-        countdown timer
-
-    ========================================================================== */
-
-    $('.countdown').downCount({
-
-        date: '12/12/2018 12:00:00' // M/D/Y
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*	ISOTOPE PORTFOLIO
-
-    /*-----------------------------------------------------------------------------------*/
-
-    var $container = $('.port-wrap .items');
-
-    $container.imagesLoaded(function() {
-
-        $container.isotope({
-
-            itemSelector: '.portfolio-item',
-
-            layoutMode: 'masonry'
-
-        });
-
-    });
-
-    $('.portfolio-filter li a').on('click', function() {
-
-        $('.portfolio-filter li a').removeClass('active');
-
-        $(this).addClass('active');
-
-        var selector = $(this).attr('data-filter');
-
-        $container.isotope({
-
-            filter: selector
-
-        });
-
-        return false;
-
-    });
-
-    //Togle Menu on click in Header
-
-    $(".menu-shows").on('click', function() {
-
-        $(".menu-shows, .menu-shows-inner, .menu").toggleClass("active");
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*	ISOTOPE PORTFOLIO
-
-    /*-----------------------------------------------------------------------------------*/
-
-    var $container = $('.port-wrap .items');
-
-    $container.imagesLoaded(function() {
-
-        $container.isotope({
-
-            itemSelector: '.portfolio-item',
-
-            layoutMode: 'masonry'
-
-        });
-
-    });
-
-    $('.portfolio-filter li a').on('click', function() {
-
-        $('.portfolio-filter li a').removeClass('active');
-
-        $(this).addClass('active');
-
-        var selector = $(this).attr('data-filter');
-
-        $container.isotope({
-
-            filter: selector
-
-        });
-
-        return false;
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*    PIE CHART
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $('#pie-1').pieChart({
-
-        barColor: '#8c5f0b',
-
-        trackColor: '#fff',
-
-        lineCap: 'round',
-
-        lineWidth: 4,
-
-        onStep: function(from, to, percent) {
-
-            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-
-        }
-
-    });
-
-    $('#pie-2').pieChart({
-
-        barColor: '#8c5f0b',
-
-        trackColor: '#fff',
-
-        lineCap: 'round',
-
-        lineWidth: 4,
-
-        onStep: function(from, to, percent) {
-
-            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-
-        }
-
-    });
-
-    $('#pie-3').pieChart({
-
-        barColor: '#8c5f0b',
-
-        trackColor: '#fff',
-
-        lineCap: 'round',
-
-        lineWidth: 4,
-
-        onStep: function(from, to, percent) {
-
-            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-
-        }
-
-    });
-
-    $('#pie-4').pieChart({
-
-        barColor: '#8c5f0b',
-
-        trackColor: '#fff',
-
-        lineCap: 'round',
-
-        lineWidth: 4,
-
-        onStep: function(from, to, percent) {
-
-            $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-
-        }
-
-    });
-
-
-
-
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*    Parallax
-
-    /*-----------------------------------------------------------------------------------*/
-
-    jQuery.stellar({
-
-        horizontalScrolling: false,
-
-        scrollProperty: 'scroll',
-
-        positionProperty: 'position',
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	SLIDER REVOLUTION
-
-    /*-----------------------------------------------------------------------------------*/
-
-    jQuery(".tp-banner").revolution({
-
-        sliderType: "standard",
-
-        sliderLayout: "auto",
-
-        delay: 9000,
-
-        minHeight: 500,
-
-        gridwidth: 0,
-
-        navigationType: "bullet",
-
-        navigationArrows: "solo",
-
-        navigationStyle: "preview4",
-
-        gridheight: 500
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	SLIDER REVOLUTION
-
-    /*-----------------------------------------------------------------------------------*/
-
-    jQuery('.tp-banner-full').show().revolution({
-
-        dottedOverlay: "none",
-
-        delay: 7000,
-
-        startwidth: 1200,
-
-        startheight: 500,
-
-        navigationType: "bullet",
-
-        navigationArrows: "solo",
-
-        navigationStyle: "preview4",
-
-        parallax: "mouse",
-
-        parallaxBgFreeze: "on",
-
-        parallaxLevels: [7, 4, 3, 2, 5, 4, 3, 2, 1, 0],
-
-        keyboardNavigation: "on",
-
-        shadow: 0,
-
-        fullWidth: "on",
-
-        fullScreen: "off",
-
-        shuffle: "off",
-
-        autoHeight: "off",
-
-        forceFullWidth: "on",
-
-        fullScreenOffsetContainer: ""
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	TESTIMONIAL SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $("#testi-slide").owlCarousel({
-
-        items: 1,
-
-        autoplay: true,
-
-        loop: true,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navigation: true,
-
-        nav: true,
-
-        navText: ["<i class='lnr lnr-arrow-left'></i>", "<i class='lnr lnr-arrow-right'></i>"],
-
-        pagination: true,
-
-        singleItem: true
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	Single SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".singl-slide").owlCarousel({
-
-        items: 1,
-
-        autoplay: true,
-
-        loop: true,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navigation: true,
-
-        nav: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        pagination: true,
-
-        singleItem: true
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	TESTIMONIAL SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".deal-slide").owlCarousel({
-
-        items: 1,
-
-        autoplay: true,
-
-        loop: true,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navigation: true,
-
-        nav: true,
-
-        navText: ["<span>Previous Deal</span>", "<span>Next Deal</span>"],
-
-        pagination: true,
-
-        lazyLoad: true,
-
-        nav: true,
-
-        singleItem: true
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	TESTIMONIAL SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".item-slide-5").owlCarousel({
-
-        items: 5,
-
-        autoplay: true,
-
-        loop: true,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            600: {
-
-                items: 3,
-
-            },
-
-            1000: {
-
-                items: 4,
-
-            },
-
-            1200: {
-
-                items: 5,
-
-            }
-
-        },
-
-        animateOut: 'fadeOut'
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	TESTIMONIAL SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".item-slide-4").owlCarousel({
-
-        items: 4,
-
-        autoplay: true,
-
-        loop: false,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            600: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 4,
-
-            }
-
-        },
-
-        animateOut: 'fadeOut'
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	CASE SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".item-slide-3").owlCarousel({
-
-        items: 3,
-
-        autoplay: true,
-
-        loop: false,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            800: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 3,
-
-            },
-
-        },
-
-        animateOut: 'fadeOut'
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	CASE SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $(".item-slide-2").owlCarousel({
-
-        items: 2,
-
-        autoplay: true,
-
-        loop: false,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            800: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 2,
-
-            },
-
-        },
-
-        animateOut: 'fadeOut'
-
-
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	CASE SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $("#blog-slide").owlCarousel({
-
-        items: 3,
-
-        autoplay: true,
-
-        loop: false,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            600: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 3,
-
-            },
-
-        },
-
-        animateOut: 'fadeOut'
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	CASE SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $("#blog-slide-2").owlCarousel({
-
-        items: 2,
-
-        autoplay: true,
-
-        loop: false,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            800: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 2,
-
-            },
-
-        },
-
-        animateOut: 'fadeOut'
-
-
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	CASE SLIDER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $("#client-slide-1").owlCarousel({
-
-        items: 4,
-
-        autoplay: true,
-
-        loop: true,
-
-        margin: 30,
-
-        autoplayTimeout: 5000,
-
-        autoplayHoverPause: true,
-
-        navText: ["<i class='lnr lnr-arrow-left'></i>", "<i class='lnr lnr-arrow-right'></i>"],
-
-        lazyLoad: true,
-
-        nav: true,
-
-        responsive: {
-
-            0: {
-
-                items: 1,
-
-            },
-
-            800: {
-
-                items: 2,
-
-            },
-
-            1000: {
-
-                items: 4,
-
-            },
-
-        },
-
-        animateOut: 'fadeOut'
-
-
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	COUNTER
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $('.counter').counterUp({
-
-        delay: 10,
-
-        time: 300
-
-    });
-
-    /*-----------------------------------------------------------------------------------
-
-        TESTNMONIALS STYLE 1
-
-    /*-----------------------------------------------------------------------------------*/
-
-    $('.free-slide').flexslider({
-
-        mode: 'fade',
-
-        animation: "fade",
-
-        auto: true
-
-    });
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	Thumb Slider
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /*$('.thumb-slider').flexslider({
-
-        animation: "slide",
-
-        controlNav: "thumbnails"
-
-    });*/
-
-    /*-----------------------------------------------------------------------------------*/
-
-    /* 	ANIMATION
-
-    /*-----------------------------------------------------------------------------------*/
-
-    var wow = new WOW({
-
-        boxClass: 'animate', // animated element css class (default is wow)
-
-        animateClass: 'animated', // animation css class (default is animated)
-
-        offset: 100, // distance to the element when triggering the animation (default is 0)
-
-        mobile: false // trigger animations on mobile devices (true is default)
-
-    });
-
-    wow.init();
-
-
-
-});
-
-
-
-$(window).load(function() {
+/*--------------------------------------------------
+Template Name: Ponno;
+Description:  eCommerce Bootstrap 4 Template;
+Version: 1.0;
+
+NOTE: main.js, All custom script and plugin activation script in this file. 
+-----------------------------------------------------
+
+    JS INDEX
+    ================================================
+    1. Newsletter Popup
+    2. Mobile Menu Activation
+    3. Tooltip Activation
+    4. Cart Box Dropdown Menu 
+    5. Checkout Page Activation
+    6. Slider Activation
+    7. Thumbnail Product activation
+    8. Apple Watch Product activation
+    9. Recent Post Activation
+    10. Featured Product Activation
+    11. Categorie Product Activation
+    12. Deal Product Activation
+    13. Onsale Product Activation
+    14. Countdown Js Activation
+    15. ScrollUp Activation
+    16. Sticky-Menu Activation
+    17. Nice Select Activation
+    18. Price Slider Activation
+    19. Brand Logo  Activation
+    
+
+================================================*/
+
+(function($) {
+    "use Strict";
+
+    /*---------------------------
+    1. Newsletter Popup
+    ----------------------------*/
     setTimeout(function() {
-        $('#carousel').flexslider({
-            animation: "slide",
-            controlNav: false,
-            animationLoop: false,
-            slideshow: false,
-            itemWidth: 90,
-            itemMargin: 5,
-            asNavFor: '#slider'
+        $('.popup_wrapper').css({
+            "opacity": "1",
+            "visibility": "visible"
         });
+        $('.popup_off').on('click', function() {
+            $(".popup_wrapper").fadeOut(500);
+        })
+    }, 2500);
 
-        $('#slider').flexslider({
-            animation: "slide",
-            controlNav: false,
-            animationLoop: false,
-            slideshow: false,
-            sync: "#carousel"
+    /*----------------------------
+    2. Mobile Menu Activation
+    -----------------------------*/
+    jQuery('.mobile-menu nav').meanmenu({
+        meanScreenWidth: "991",
+    });
+
+    /*----------------------------
+    3. Tooltip Activation
+    ------------------------------ */
+    $('.pro-add-cart a,.pro-actions-link a').tooltip({
+        animated: 'fade',
+        placement: 'top',
+        container: 'body'
+    });
+
+    /*---------------------------------
+	4. Cart Box Dropdown Menu 
+    -----------------------------------*/
+
+    /*----------------------------
+    5. Checkout Page Activation
+    -----------------------------*/
+    $('#showlogin').on('click', function() {
+        $('#checkout-login').slideToggle();
+    });
+    $('#showcoupon').on('click', function() {
+        $('#checkout_coupon').slideToggle();
+    });
+    $('#cbox').on('click', function() {
+        $('#cbox_info').slideToggle();
+    });
+    $('#ship-box').on('click', function() {
+        $('#ship-box-info').slideToggle();
+    });
+
+    /*----------------------------
+    6. Slider Activation
+    -----------------------------*/
+    $(".slider-activation").owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        autoplay: false,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
+        items: 1,
+        autoplayTimeout: 10000,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        dots: true,
+        autoHeight: true,
+        lazyLoad: true,
+    });
+
+    /*-------------------------------------
+    7. Thumbnail Product activation
+    --------------------------------------*/
+    $('.thumb-menu').owlCarousel({
+        loop: true,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 15,
+        smartSpeed: 500,
+        nav: true,
+        dots: false,
+        responsive: {
+            0: {
+                items: 3,
+                autoplay: true,
+            },
+            768: {
+                items: 3
+            },
+            1200: {
+                items: 4
+            }
+        }
+    })
+    $('.thumb-menu a').on('click', function() {
+        $('.thumb-menu a').removeClass('active');
+    })
+
+    /*-------------------------------------
+    8. Apple Watch Product activation
+    --------------------------------------*/
+    $('.large-active').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.thumb_active',
+        infinite: true,
+    });
+
+
+    $('.thumb_active').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.large-active',
+        dots: false,
+        arrows: false,
+        centerMode: true,
+        centerPadding: 0,
+        focusOnSelect: true,
+        infinite: true,
+        vertical: true,
+    }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        $(this).find('.slick-slide').removeClass('first-item last-item');
+        $(this).find('.slick-slide[data-slick-index="' + nextSlide + '"]').prev().addClass('first-item');
+        $(this).find('.slick-slide[data-slick-index="' + nextSlide + '"]').next().addClass('last-item');
+    });
+
+    $('.thumb_active').find('.slick-slide.slick-active').first().addClass('first-item');
+    $('.thumb_active').find('.slick-slide.slick-active').last().addClass('last-item');
+
+
+    /*-----------------------------
+    9. Recent Post Activation
+    -----------------------------*/
+    $(".recent-post-active").owlCarousel({
+        loop: true,
+        margin: 0,
+        smartSpeed: 500,
+        nav: false,
+        autoplay: false,
+        items: 1,
+        dots: false,
+    });
+
+    /*----------------------------------------
+    10. Featured Product Activation
+    ----------------------------------------*/
+    $('.feature-pro-active').owlCarousel({
+        loop: true,
+        nav: true,
+        dots: false,
+        smartSpeed: 1500,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1,
+                autoplay: true,
+                smartSpeed: 500
+            },
+            480: {
+                items: 2
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            },
+            1200: {
+                items: 4
+            }
+        }
+    })
+
+    /*----------------------------------------
+    11. Categorie Product Activation
+    ----------------------------------------*/
+    $('.categorie-pro-active').owlCarousel({
+        loop: true,
+        nav: true,
+        dots: false,
+        smartSpeed: 1500,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1,
+                autoplay: true,
+                smartSpeed: 500
+            },
+            480: {
+                items: 2
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            },
+            1200: {
+                items: 3
+            }
+        }
+    })
+
+    /*----------------------------------------
+    12. Deal Product Activation
+    ----------------------------------------*/
+    $('.deal-active').owlCarousel({
+        loop: true,
+        nav: false,
+        dots: false,
+        smartSpeed: 500,
+        autoplay: true,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 2
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            },
+            1200: {
+                items: 1
+            }
+        }
+    })
+
+    /*----------------------------------------
+    13. Onsale Product Activation
+    ----------------------------------------*/
+    $('.onsale-active').owlCarousel({
+        loop: true,
+        nav: false,
+        dots: false,
+        smartSpeed: 500,
+        autoplay: true,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            480: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 2
+            },
+            1200: {
+                items: 1
+            }
+        }
+    })
+
+    /*----------------------------
+    14. Countdown Js Activation
+    -----------------------------*/
+    $('[data-countdown]').each(function() {
+        var $this = $(this),
+            finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('<div class="count"><p>%D</p><span>Days</span></div><div class="count"><p>%H</p> <span>Hrs</span></div><div class="count"><p>%M</p> <span>Min</span></div><div class="count"> <p>%S</p> <span>Secs</span></div>'));
         });
+    });
 
-    }, 500);
+    /*----------------------------
+    15. ScrollUp Activation
+    -----------------------------*/
+    $.scrollUp({
+        scrollName: 'scrollUp', // Element ID
+        topDistance: '550', // Distance from top before showing element (px)
+        topSpeed: 1000, // Speed back to top (ms)
+        animation: 'fade', // Fade, slide, none
+        scrollSpeed: 900,
+        animationInSpeed: 1000, // Animation in speed (ms)
+        animationOutSpeed: 1000, // Animation out speed (ms)
+        scrollText: '<i class="fa fa-angle-double-up" aria-hidden="true"></i>', // Text for element
+        activeOverlay: false // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+    });
 
-})
+    /*----------------------------
+    16. Sticky-Menu Activation
+    ------------------------------ */
+    $(window).on('scroll', function() {
+        if ($(this).scrollTop() > 100) {
+            $('.header-sticky').addClass("sticky");
+        } else {
+            $('.header-sticky').removeClass("sticky");
+        }
+    });
+
+    /*----------------------------
+    17. Nice Select Activation
+    ------------------------------ */
+    $('select').niceSelect();
+
+    /*----------------------------
+    18. Price Slider Activation
+    -----------------------------*/
+    $("#slider-range").slider({
+        range: true,
+        min: 0,
+        max: 100,
+        values: [0, 85],
+        slide: function(event, ui) {
+            $("#amount").val("$" + ui.values[0] + "  $" + ui.values[1]);
+        }
+    });
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+        "  $" + $("#slider-range").slider("values", 1));
+
+    /*--------------------------------
+    19. Brand Logo  Activation
+    ---------------------------------*/
+    $('.brand-logo-active').owlCarousel({
+        loop: true,
+        autoplay: true,
+        nav: true,
+        dots: false,
+        smartSpeed: 500,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 20,
+        responsive: {
+            0: {
+                items: 1,
+                autoplay: true,
+                smartSpeed: 300
+            },
+            340: {
+                items: 2
+            },
+            480: {
+                items: 3
+            },
+            768: {
+                items: 4
+            },
+            992: {
+                items: 4
+            },
+            1200: {
+                items: 5
+            }
+        }
+    })
+
+})(jQuery);

@@ -45,6 +45,7 @@ namespace WebAPI.Services
                 return null;
             }
         }
+
         public string WriteFileBase64(string data)
         {
 

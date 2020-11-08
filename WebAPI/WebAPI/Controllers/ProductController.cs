@@ -2,24 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using WebAPI.Models;
+using WebAPI.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly doan5Context _context;
+        private readonly IFileService _fileService;
 
-        public ProductController(doan5Context context)
+        public ProductController(doan5Context context, IFileService fileService)
         {
             _context = context;
+            _fileService = fileService;
         }
 
         // GET: api/values
@@ -53,12 +58,14 @@ namespace WebAPI.Controllers
                     p.Status
                 })
                 .FirstOrDefault(p => p.Id == id);
-            var o = _context.Options.Where(o => o.ProductId == id).ToList();
             if (p == null)
             {
                 return NotFound();
             }
-            return Ok(new { product = p, option = o });
+            var o = _context.Options.Where(o => o.ProductId == id).ToList();
+            var i = _context.Images.Where(i => i.ProductId == id).ToList();
+            var c = _context.Categories.Find(p.CategoryId);
+            return Ok(new { product = p, option = o, image = i, category = c });
         }
 
 
@@ -73,18 +80,34 @@ namespace WebAPI.Controllers
             product.Description = data.Description;
             product.Content = data.Content;
             product.Status = data.Status;
-            product.CategoryId = 1;
+            product.CategoryId = data.CategoryId;
             _context.Products.Add(product);
             _context.SaveChanges();
-            foreach (var item in data.Options)
+
+            if (data.Images != null)
             {
-                var option = new Options();
-                option.ProductId = product.Id;
-                option.Name = item.Name;
-                option.Quantity = item.Quantity;
-                option.Price = item.Price;
-                _context.Options.Add(option);
-                _context.SaveChanges();
+                foreach (var item in data.Images)
+                {
+                    var image = new Images();
+                    image.ProductId = product.Id;
+                    image.Name = _fileService.WriteFileBase64(item.Name);
+                    _context.Images.Add(image);
+                    _context.SaveChanges();
+                }
+            }
+
+            if (data.Options != null)
+            {
+                foreach (var item in data.Options)
+                {
+                    var option = new Options();
+                    option.ProductId = product.Id;
+                    option.Name = item.Name;
+                    option.Quantity = item.Quantity;
+                    option.Price = item.Price;
+                    _context.Options.Add(option);
+                    _context.SaveChanges();
+                }
             }
             return Ok(data);
         }
@@ -102,8 +125,26 @@ namespace WebAPI.Controllers
                 product.Description = data.Description;
                 product.Content = data.Content;
                 product.Status = data.Status;
-                product.CategoryId = 1;
+                if (data.CategoryId != null)
+                {
+                    product.CategoryId = data.CategoryId;
+                }
                 _context.SaveChanges();
+
+                if (data.Images.Count() != 0)
+                {
+                    var img = _context.Images.Where(i => i.ProductId == id);
+                    _context.Images.RemoveRange(img);
+
+                    foreach (var item in data.Images)
+                    {
+                        var image = new Images();
+                        image.ProductId = product.Id;
+                        image.Name = _fileService.WriteFileBase64(item.Name);
+                        _context.Images.Add(image);
+                        _context.SaveChanges();
+                    }
+                }
 
                 var op = _context.Options.Where(o => o.ProductId == id);
                 _context.Options.RemoveRange(op);

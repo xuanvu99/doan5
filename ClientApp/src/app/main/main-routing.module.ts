@@ -1,37 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '../auth/login/login.component';
-import { Page404Component } from '../auth/page404/page404.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
-import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
+import { CheckoutComponent } from "./checkout/checkout.component";
+import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { ListProductComponent } from './list-product/list-product.component';
 import { MainComponent } from './main.component';
-import { PaymentMethodComponent } from './payment-method/payment-method.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'trang-chu',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: '',
     component: MainComponent,
     children: [
       { path: 'trang-chu', component: HomeComponent },
-      { path: 'danh-sach', component: ListProductComponent },
-      { path: 'chi-tiet', component: DetailProductComponent },
-      { path: 'gio-hang', component: ShoppingCartComponent },
-      { path: 'phuong-thuc-thanh-toan', component: PaymentMethodComponent },
-      { path: 'phuong-thuc-giao-hang', component: DeliveryMethodComponent },
-      { path: 'xac-thuc-don-hang', component: ConfirmationComponent },
-      { path: 'dat-hang-thanh-cong', component: CheckoutComponent },
-      { path: 'dang-nhap-dang-ky', component: LoginComponent },
-      { path: '**', component: Page404Component }
+      { path: 'danh-sach/:id', component: ListProductComponent },
+      { path: 'chi-tiet/:id', component: ProductDetailComponent },
+      { path: 'gio-hang', component: CartComponent },
+      { path: 'thanh-toan', component: CheckoutComponent },
+      { path: 'dang-nhap', component: LoginComponent },
+      { path: 'dang-ky', component: RegisterComponent },
     ]
   }
 ];

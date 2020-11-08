@@ -1,46 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.IdentityModel.Tokens;
+using WebAPI.Models;
+using BC = BCrypt.Net.BCrypt;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class HomeController : Controller
+    [ApiController]
+    public class HomeController : ControllerBase
     {
-        // GET: api/values
+        private readonly doan5Context _context;
+
+        public HomeController(doan5Context context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Home()
         {
-            return new string[] { "value1", "value2" };
+            var category = _context.Categories.Select(c => new {
+                c.Name,
+                c.Slug,
+                c.Status
+            }).Where(c => c.Status == true).ToList();
+            return Ok(category);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet, Route("list-product/{id}")]
+        public IActionResult ListProduct(string id)
         {
-            return "value";
+            var cate = _context.Categories.Select(c => new {
+                c.Id,
+                c.Slug
+            }).FirstOrDefault(l => l.Slug == id);
+            if (cate == null)
+            {
+                return NotFound();
+            }
+            var list = _context.Products
+                .Select(p => new
+                {
+                    p.Id,
+                    p.Name,
+                    p.Price,
+                    p.Sale,
+                    p.Description,
+                    p.CategoryId,
+                    Images = _context.Images.Where(i => i.ProductId == p.Id).ToList()
+                })
+                .Where(l => l.CategoryId == cate.Id);
+            return Ok(list);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

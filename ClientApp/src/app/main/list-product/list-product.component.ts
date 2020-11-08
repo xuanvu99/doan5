@@ -1,38 +1,46 @@
-import { Component, Injector, OnInit, Renderer2 } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { HomeService } from 'src/app/services/home.service';
+import { environment } from 'src/environments/environment';
+import { ScriptService } from "../../libs/script.service";
 
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
   styleUrls: ['./list-product.component.css']
 })
-export class ListProductComponent implements OnInit {
-  public _renderer: any
+export class ListProductComponent extends ScriptService implements OnInit {
+  list = [];
 
-  constructor(injector: Injector) {
-    this._renderer = injector.get(Renderer2);
+  constructor(
+    injector: Injector,
+    private route: ActivatedRoute,
+    private homeService: HomeService
+  ) {
+    super(injector)
   }
 
   ngOnInit(): void {
-    // let elem = document.getElementsByClassName('nouislider');
-    // for (var i = elem.length - 1; 0 <= i; i--) {
-    //   elem[i].remove();
-    // }
-    // this.loadScripts();
+    let elem = document.getElementsByClassName('script');
+    if (elem.length != undefined) {
+      for (var i = elem.length - 1; 0 <= i; i--) {
+        elem[i].remove();
+      }
+    }
+    setTimeout(() => {
+      this.loadScripts();
+    }, 1000)
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id');
+      this.homeService.getList(id).subscribe((data: any) => {
+        this.list = data;
+      })
+    })
   }
 
-  // public loadScripts() {
-  //   this.renderExternalScript('assets/js/vendors/jquery.nouislider.min.js').onload = () => { }
-  // }
-
-  // public renderExternalScript(src: string): HTMLScriptElement {
-  //   const script = document.createElement('script');
-  //   script.type = 'text/javascript';
-  //   script.src = src;
-  //   script.async = true;
-  //   script.defer = true;
-  //   script.className = "nouislider";
-  //   this._renderer.appendChild(document.body, script);
-  //   return script;
-  // }
+  createImg = (nameFile: string) => {
+    return environment.urlImage + nameFile;
+  }
 
 }
